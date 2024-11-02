@@ -1,0 +1,74 @@
+[build-system]
+requires = ["poetry-core>=1.8.4"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "cookiecutter-django"
+version = "0.0.1"  # changed by semantic-release
+description = "Boilerplate to create Django projects. Inspired on cookiecutter/cookiecutter-django"
+readme = "README.md"
+license = "GNU GPL v3.0"
+authors = ["Luã Bida Vacaro <luabidaa@gmail.com>"]
+repository = "https://github.com/luabida/cookiecutter-django"
+homepage = "https://github.com/luabida/cookiecutter-django"
+
+[tool.poetry.dependencies]
+python = ">=3.12,<4"
+cookiecutter = "2.6"
+jinja2 = "3.1.4"
+pyyaml = "6.0.2"
+requests = "2.32.3"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "8.3.3"
+pre-commit = "3.8"
+djlint = "1.35.2"
+ruff = "0.7"
+django-upgrade = "1.21"
+tox = "4.21.2"
+
+[dependency-groups]
+[tool.black]
+line-length = 80
+target-version = [
+  'py312',
+]
+
+[tool.isort]
+profile = "black"
+line_length = 80
+known_first_party = [
+  "tests",
+  "scripts",
+  "hooks",
+]
+
+[tool.pytest.ini_options]
+addopts = "-v --tb=short"
+norecursedirs = [
+  ".tox",
+  ".git",
+  "*/migrations/*",
+  "*/static/*",
+  "docs",
+  "venv",
+  "*/{{cookiecutter.project_slug}}/*",
+]
+
+[tool.djlint]
+blank_line_after_tag = "load,extends"
+close_void_tags = true
+format_css = true
+format_js = true
+ignore = "H006,H030,H031,T002,T028"
+ignore_blocks = "raw"
+include = "H017,H035"
+indent = 2
+max_line_length = 119
+profile = "jinja"
+
+[tool.djlint.css]
+indent_size = 2
+
+[tool.djlint.js]
+indent_size = 2
